@@ -45,7 +45,8 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
-                        'role_id' => $user['role_id']
+                        'role_id' => $user['role_id'],
+                        'id' => $user['id']
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
@@ -96,7 +97,7 @@ class Auth extends CI_Controller
                 'email' => htmlspecialchars($email),
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
+                'role_id' => 3,
                 'is_active' => 0,
                 'date_created' => time()
             ];

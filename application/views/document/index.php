@@ -3,19 +3,21 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <?= var_dump($documents)?>
 
     <?php foreach($documents as $row):?>
-    <div class="card" style="width: 35%; margin-top: 2%; padding: 1%">
-      <img style="width:100%; max-width: 450px;" class="card-img-top" src="<?php echo base_url("assets/img/document/").$row->image_document?>" alt="Card image cap">
+    <div class="card" style="width: 100%; margin-top: 2%; padding: 1%">
       <div class="card-body">
-        <h5 class="card-title"><?php echo $row->name_document?></h5>
-        <div class="row">
-            <p class="card-text col-6"><?php echo $row->destination_document?></p>
-            <p class="card-text col-6"><?php echo $row->name?></p>
-        </div>
-        <a href="#" class="btn btn-primary">Details</a>
+        <h5 class="card-title"><?php echo "Visa " .$row->name_country?></h5>
+        <span class="card-text" style="margin-left: 1%"><?php echo "a.n. ". $row->name_document?></span><br>
+        <span class="card-text" style="margin-left: 1%"><?php echo "User by: ".$row->name?></span><br>
+        <span class="card-text" style="margin-left: 1%"><?php echo "Date created : ".$row->date_created_document?></span><br>
+        <span class="card-text" style="margin-left: 1%"><?php echo "Status : ".$row->name_status?></span><br>
+        <a style="margin-left: 1%; margin-top: 1%" href="<?php echo site_url('documents/details/'). $row->id_document?>" class="btn btn-primary">Details</a>
       </div>
     </div>
+
+
     <?php endforeach;?>
 
 

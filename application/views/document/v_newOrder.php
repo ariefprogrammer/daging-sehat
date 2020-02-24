@@ -28,6 +28,7 @@
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="email" name="email_document" placeholder="Your email">
                         <input type="hidden" class="form-control" id="pic" name="pic_document" value="<?= $user['id']; ?>">
+                        <input type="hidden" class="form-control" id="date_created_document" name="date_created_document" value="<?php echo date("Y-m-d")?>">
                         <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
