@@ -31,6 +31,8 @@ class Documents extends CI_Controller
 		$data['title'] = 'New Order';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['destination'] = $this->MDocument->getDestination();
+		$data['getLastId'] = $this->MDocument->getLastId();
+
 
 		$this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -40,7 +42,8 @@ class Documents extends CI_Controller
 
         if (isset($_POST['submit_document'])) {
         	$this->MDocument->save($_POST);
-        	redirect('documents');
+        	$id_document_new = $this->input->post('id_document');
+        	redirect('documents/details/'.$id_document_new);
         }
 	}
 

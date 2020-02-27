@@ -201,6 +201,12 @@ class MDocument extends CI_Model
 		$sql = $this->db->query("SELECT image_document FROM tb_files WHERE id_document= $id_document AND pic=$id_pic");
 		return $sql->result();
 	}
+
+	public function getLastId()
+	{
+		$sql = $this->db->query("SELECT id_document FROM tb_document ORDER BY id_document DESC LIMIT 1");
+		return $sql->row();
+	}
 }
 
 ?>

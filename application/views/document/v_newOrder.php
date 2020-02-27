@@ -3,11 +3,22 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <?php 
+    $lasCode = $getLastId->id_document;
+    $newCode = $lasCode + 1;
+    ?>
 
     <div class="row">
         <div class="col-lg-8">
 
             <form method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="id_document" class="col-sm-2 col-form-label">ID Order</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_document" name="id_document" value="<?php echo $newCode?>" readonly>
+                        <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
