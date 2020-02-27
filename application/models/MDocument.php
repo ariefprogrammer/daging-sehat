@@ -16,27 +16,54 @@ class MDocument extends CI_Model
 		$destination = $this->db->escape($post["destination_document"]);
 
 		// cek jika ada gambar yang akan diupload
-        $upload_image = $_FILES['image_document']['name'];
+    //     $image_name = $_FILES['image_document']['name'];
 
-        if ($upload_image) {
-            $config['allowed_types'] = 'gif|jpg|png|webp';
-            $config['max_size']      = '5048';
-            $config['upload_path'] = './assets/img/document/';
+    //     if ($image_name) {
+    //         $config['allowed_types'] = 'gif|jpg|png|webp';
+    //         $config['max_size']      = '5048';
+    //         $config['upload_path'] = 'C:\xampp\htdocs\hidayat\assets\img\document';
 
-            $this->load->library('upload', $config);
+    //         $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload('image_document')) {
-                $old_image = $data['user']['image_document'];
-                if ($old_image != 'default.jpg') {
-                    unlink(FCPATH . 'assets/img/document/' . $old_image);
-                }
-                $new_image = $this->upload->data('file_name');
-                $this->db->set('image_document', $new_image);
-            } else {
-                echo $this->upload->dispay_errors();
-            }
-        }
-        $image = $upload_image;
+    //         if ($this->upload->do_upload('image_document')) {
+    //             $old_image = $data['user']['image_document'];
+    //             // if ($old_image != 'default.jpg') {
+    //             //     unlink(FCPATH . 'assets/img/document/' . $old_image);
+    //             // }
+    //             $new_image = $this->upload->data('file_name');
+    //             $this->db->set('image_document', $new_image);
+    //             echo "<pre>";
+				// print_r($this->upload->data());
+				// print_r($this->upload->display_errors());
+				// echo "</pre>";
+				// exit();
+    //         } else {
+    //             echo $this->upload->display_errors();
+    //             echo "<pre>";
+				// print_r($this->upload->data());
+				// print_r($this->upload->display_errors());
+				// echo "</pre>";
+				// exit();
+    //         }
+    //     }
+
+        if(!empty($_FILES['image_document']['name'])){
+				$image_name =  str_replace(' ','_',date('Ymdhis').$_FILES['image_document']['name']);
+				$config['upload_path']      = './assets/img/document/';
+				$config['allowed_types']    = 'gif|jpg|png|webp';
+				$config['max_size']      	= '5048';
+				$config['file_name']        = $image_name;
+				$this->upload->initialize($config);
+				$this->upload->do_upload('image_document');
+				// echo "<pre>";
+				// print_r($this->upload->data());
+				// print_r($this->upload->display_errors());
+				// echo "</pre>";
+				// exit();
+		}else{
+				$image_name = '';
+		}
+        $image = $image_name;
         $pic = $this->db->escape($post["pic_document"]);
         $date_created_document = $this->db->escape($post["date_created_document"]);
         $id_status = 1;

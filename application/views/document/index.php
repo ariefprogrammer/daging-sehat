@@ -3,7 +3,6 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <?= var_dump($documents)?>
 
     <?php foreach($documents as $row):?>
     <div class="card" style="width: 100%; margin-top: 2%; padding: 1%">

@@ -7,8 +7,7 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <!-- <?= form_open_multipart('documents/newOrder'); ?> -->
-            <form method="POST" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
