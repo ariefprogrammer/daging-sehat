@@ -44,12 +44,14 @@ class Documents extends CI_Controller
         }
 	}
 
-	public function details($id)
+	public function details($id_document)
 	{
+		$id_session = $this->session->userdata('id');
 		$data['title'] = 'Tracking Record';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['detailsDocument'] = $this->MDocument->getById($id);
-        $data['records'] = $this->MDocument->getAllRecords($id);
+        $data['detailsDocument'] = $this->MDocument->getById($id_document);
+        $data['records'] = $this->MDocument->getAllRecords($id_document);
+        $data['filesByDocument'] = $this->MDocument->getFilesByDocument($id_document, $id_session);
 
 		$this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -91,6 +93,28 @@ class Documents extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('document/mydocuments', $data);
         $this->load->view('templates/footer');
+	}
+
+	public function addFile($id_document)
+	{
+		$id = $this->session->userdata('id');
+		$data['title'] = 'Add File Attachment';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['detailsDocument'] = $this->MDocument->getById($id_document);
+		$data['id'] = $this->session->userdata('id');
+
+		$this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('document/v_addFile', $data);
+        $this->load->view('templates/footer');
+
+        if (isset($_POST['submit_file_document'])) {
+        	// $this->MDocument->newRecord($_POST);
+        	// $this->MDocument->updateStatus($_POST, $id);
+        	$this->MDocument->addFile($_POST, $id_document, $id); 
+        	redirect('documents/details/'.intval($id_document));
+        }
 	}
 
 }

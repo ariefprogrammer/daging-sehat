@@ -47,28 +47,28 @@ class MDocument extends CI_Model
     //         }
     //     }
 
-        if(!empty($_FILES['image_document']['name'])){
-				$image_name =  str_replace(' ','_',date('Ymdhis').$_FILES['image_document']['name']);
-				$config['upload_path']      = './assets/img/document/';
-				$config['allowed_types']    = 'gif|jpg|png|webp';
-				$config['max_size']      	= '5048';
-				$config['file_name']        = $image_name;
-				$this->upload->initialize($config);
-				$this->upload->do_upload('image_document');
-				// echo "<pre>";
-				// print_r($this->upload->data());
-				// print_r($this->upload->display_errors());
-				// echo "</pre>";
-				// exit();
-		}else{
-				$image_name = '';
-		}
-        $image = $image_name;
+  //       if(!empty($_FILES['image_document']['name'])){
+		// 		$image_name =  str_replace(' ','_',date('Ymdhis').$_FILES['image_document']['name']);
+		// 		$config['upload_path']      = './assets/img/document/';
+		// 		$config['allowed_types']    = 'gif|jpg|png|webp';
+		// 		$config['max_size']      	= '5048';
+		// 		$config['file_name']        = $image_name;
+		// 		$this->upload->initialize($config);
+		// 		$this->upload->do_upload('image_document');
+		// 		echo "<pre>";
+		// 		print_r($this->upload->data());
+		// 		print_r($this->upload->display_errors());
+		// 		echo "</pre>";
+		// 		exit();
+		// }else{
+		// 		$image_name = '';
+		// }
+  //       $image = $image_name;
         $pic = $this->db->escape($post["pic_document"]);
         $date_created_document = $this->db->escape($post["date_created_document"]);
         $id_status = 1;
 
-		$sql = $this->db->query("INSERT INTO tb_document VALUES(NULL,$name, $phone, $email, $birthday, $destination, '$image', $pic, $date_created_document, $id_status)");
+		$sql = $this->db->query("INSERT INTO tb_document VALUES(NULL,$name, $phone, $email, $birthday, $destination, $pic, $date_created_document, $id_status)");
 
 		if ($sql) {
 			return true;
@@ -162,6 +162,44 @@ class MDocument extends CI_Model
 		$sql = $this->db->query("UPDATE tb_document SET id_status=$id_status WHERE id_document = ".intval($id));
 		return true;
 
+	}
+
+	public function addFile($post, $id_document, $id)
+	{
+		$id_document = $this->db->escape($post["id_document"]);
+		if(!empty($_FILES['image_document']['name'])){
+				$image_name =  str_replace(' ','_',date('Ymdhis').$_FILES['image_document']['name']);
+				$config['upload_path']      = './assets/img/document/';
+				$config['allowed_types']    = 'gif|jpg|png|webp';
+				$config['max_size']      	= '5048';
+				$config['file_name']        = $image_name;
+				$this->upload->initialize($config);
+				$this->upload->do_upload('image_document');
+				// echo "<pre>";
+				// print_r($this->upload->data());
+				// print_r($this->upload->display_errors());
+				// echo "</pre>";
+				// exit();
+		}else{
+				$image_name = '';
+		}
+
+		$image_document = $image_name;
+		$id_pic = $id;
+
+		$sql = $this->db->query("INSERT INTO tb_files VALUES(NULL, $id_document, '$image_document', $id_pic)");
+
+		if ($sql) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function getFilesByDocument($id_document, $id_pic)
+	{
+		$sql = $this->db->query("SELECT image_document FROM tb_files WHERE id_document= $id_document AND pic=$id_pic");
+		return $sql->result();
 	}
 }
 

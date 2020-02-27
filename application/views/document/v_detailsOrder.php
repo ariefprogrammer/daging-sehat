@@ -140,7 +140,14 @@
         <h5 class="card-title"><?php echo "date created : ".$detailsDocument->date_created_document?></h5>
         <span class="card-text" style="margin-left: 1%"><?php echo "a.n. ". $detailsDocument->name_document?></span><br>
         <span class="card-text" style="margin-left: 1%"><?php echo "user by: ".$detailsDocument->name?></span> <br>
-        <span class="card-text" style="margin-left: 1%"><?php echo "Status : ".$detailsDocument->name_status?></span>
+        <span class="card-text" style="margin-left: 1%"><?php echo "Status : ".$detailsDocument->name_status?></span><br>
+        <?php foreach($filesByDocument as $files):?>
+          <img style="width: 23%" src="<?php echo base_url('assets/img/document/').$files->image_document?>">
+        <?php endforeach;?>
+        <br>
+        <div class="float-right" style="margin-top: 2%">
+          <a href="<?php echo site_url('documents/addfile/').$detailsDocument->id_document?>"><button class="btn btn-info">Attachment</button></a>
+        </div>
       </div>
     </div>
 

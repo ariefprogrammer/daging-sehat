@@ -52,7 +52,7 @@
                     
                   </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <div class="col-sm-2">Picture</div>
                     <div class="col-sm-10">                    
                         <div class="custom-file">
@@ -60,7 +60,7 @@
                             <label class="custom-file-label" for="image">Choose file</label>
                         </div>
                     </div>
-                </div>                        
+                </div>  -->                       
 
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
