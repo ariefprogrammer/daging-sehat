@@ -2,9 +2,11 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title?></h1>
+    <h1 class="h3 mb-4 text-gray-800 text-center"><?= $title?></h1>
 
-    <?php foreach($documents as $row):?>
+    <!-- <?php echo var_dump($documentprocessed)?> -->
+
+    <?php foreach($documentprocessed as $row):?>
     <div class="card" style="width: 100%; margin-top: 2%; padding: 1%">
       <div class="card-body">
         <h5 class="card-title"><?php echo "a.n. " .$row->name_document?></h5>

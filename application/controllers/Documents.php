@@ -9,7 +9,9 @@ class Documents extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('form_validation');
 		$this->load->model("MDocument");
+		is_logged_in();
 	}
 
 	public function index()
@@ -26,26 +28,6 @@ class Documents extends CI_Controller
         $this->load->view('templates/footer');
 	}
 
-	public function newOrder()
-	{
-		$data['title'] = 'New Order';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['destination'] = $this->MDocument->getDestination();
-		$data['getLastId'] = $this->MDocument->getLastId();
-
-
-		$this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('document/v_newOrder', $data);
-        $this->load->view('templates/footer');
-
-        if (isset($_POST['submit_document'])) {
-        	$this->MDocument->save($_POST);
-        	$id_document_new = $this->input->post('id_document');
-        	redirect('documents/details/'.$id_document_new);
-        }
-	}
 
 	public function details($id_document)
 	{
@@ -81,21 +63,6 @@ class Documents extends CI_Controller
         	$this->MDocument->updateStatus($_POST, $id);
         	redirect('documents/details/'.intval($id));
         }
-	}
-
-	public function mydocuments()
-	{
-		$id = $this->session->userdata('id');
-		$data['title'] = 'My Documents';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['documents'] = $this->MDocument->myDocuments($id);
-		$data['id'] = $this->session->userdata('id');
-
-		$this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('document/mydocuments', $data);
-        $this->load->view('templates/footer');
 	}
 
 	public function addFile($id_document)

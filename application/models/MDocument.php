@@ -9,6 +9,10 @@ class MDocument extends CI_Model
 	
 	public function save($post)
 	{
+		//here 
+		$this->form_validation->set_rules('name_document', 'Name_document', 'trim|required');
+		$this->form_validation->set_rules('phone_document', 'Phone_document', 'required');
+
 		$name = $this->db->escape($post["name_document"]);
 		$phone = $this->db->escape($post["phone_document"]);
 		$email = $this->db->escape($post["email_document"]);
@@ -206,6 +210,33 @@ class MDocument extends CI_Model
 	{
 		$sql = $this->db->query("SELECT id_document FROM tb_document ORDER BY id_document DESC LIMIT 1");
 		return $sql->row();
+	}
+
+	public function documentprocessed($id_session, $id_status)
+	{
+		// $this->db->select('tb_document.*, user.*, tb_country.*, tb_status.*');
+		// $this->db->from('tb_document');
+		// $this->db->join('user', 'user.id=tb_document.pic_document');
+		// $this->db->join('tb_country', 'tb_document.destination_document=tb_country.id_country');
+		// $this->db->join('tb_status', 'tb_document.id_status=tb_status.id_status');
+		// $this->db->where('pic_document', $id_session);
+		// $this->db->where('id_status', $id_status);
+		// return $this->db->get()->result();
+		
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		return $sql->result();
+	}
+
+	public function documentdone($id_session, $id_status)
+	{
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		return $sql->result();
+	}
+
+	public function documentsubmited($id_session, $id_status)
+	{
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		return $sql->result();
 	}
 }
 

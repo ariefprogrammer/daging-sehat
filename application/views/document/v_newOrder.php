@@ -11,41 +11,41 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" action="<?= base_url('documents/neworder'); ?>" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="id_document" class="col-sm-2 col-form-label">ID Order</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="id_document" name="id_document" value="<?php echo $newCode?>" readonly>
-                        <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <label for="name_document" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name_document" placeholder="Your name">
-                        <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="text" class="form-control" id="name_document" name="name_document" placeholder="Your name" value="<?= set_value('name_document')?>">
+                        <?= form_error('name_document', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="phone" class="col-sm-2 col-form-label">Telp / HP</label>
+                    <label for="phone_document" class="col-sm-2 col-form-label">Telp / HP</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="phone" name="phone_document" placeholder="Your number">
-                        <?= form_error('phone', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="number" class="form-control" id="phone_document" name="phone_document" placeholder="Your number" value="<?= set_value('phone_document')?>">
+                        <?= form_error('phone_document', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <label for="email_document" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" name="email_document" placeholder="Your email">
+                        <input type="email" class="form-control" id="email_document" name="email_document" placeholder="Your email" value="<?= set_value('email_document')?>">
                         <input type="hidden" class="form-control" id="pic" name="pic_document" value="<?= $user['id']; ?>">
                         <input type="hidden" class="form-control" id="date_created_document" name="date_created_document" value="<?php echo date("Y-m-d")?>">
-                        <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <?= form_error('email_document', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="birthday" class="col-sm-2 col-form-label">Date of birthday</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="birthday" name="birthday_document">
+                        <input type="date" class="form-control" id="birthday_document" name="birthday_document" value="<?= set_value('birthday_document')?>">
+                        <?= form_error('birthday_document', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                  <div class="form-group row">
@@ -59,6 +59,7 @@
                                 }
                             ?>
                         </select>
+                        <?= form_error('destination_document', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                     
                   </div>

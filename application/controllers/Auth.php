@@ -98,7 +98,7 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 3,
-                'is_active' => 0,
+                'is_active' => 1,
                 'date_created' => time()
             ];
 
@@ -113,9 +113,9 @@ class Auth extends CI_Controller
             $this->db->insert('user', $data);
             $this->db->insert('user_token', $user_token);
 
-            $this->_sendEmail($token, 'verify');
+            // $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please activate your account</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login!</div>');
             redirect('auth');
         }
     }
@@ -126,16 +126,17 @@ class Auth extends CI_Controller
         $config = [
             'protocol'  => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'blackconnor78@gmail.com',
-            'smtp_pass' => 'pertahanansipiL123qwe.',
+            'smtp_user' => 'documenttrackingdev@gmail.com',
+            'smtp_pass' => 'histravel123qwe.',
             'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
-            'newline'   => "\r\n"];
+            'newline'   => "\r\n"]
+            ;
 
         $this->email->initialize($config);
 
-        $this->email->from('blackconnor78@gmail.com', 'Account Verification - Document Tracking');
+        $this->email->from('documenttrackingdev@gmail.com', 'Account Verification - Document Tracking');
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {
