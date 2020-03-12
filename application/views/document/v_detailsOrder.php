@@ -146,7 +146,7 @@
         <?php endforeach;?>
         <br>
         <div class="float-right" style="margin-top: 2%">
-          <a href="<?php echo site_url('documents/addfile/').$detailsDocument->id_document?>"><button class="btn btn-info">Attachment</button></a>
+          <a href="<?php echo site_url('submission/addfile/').$detailsDocument->id_document?>"><button class="btn btn-info">Attachment</button></a>
         </div>
       </div>
     </div>

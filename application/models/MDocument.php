@@ -212,7 +212,7 @@ class MDocument extends CI_Model
 		return $sql->row();
 	}
 
-	public function documentprocessed($id_session, $id_status)
+	public function documentprocessed($id_status)
 	{
 		// $this->db->select('tb_document.*, user.*, tb_country.*, tb_status.*');
 		// $this->db->from('tb_document');
@@ -223,19 +223,19 @@ class MDocument extends CI_Model
 		// $this->db->where('id_status', $id_status);
 		// return $this->db->get()->result();
 		
-		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE tb_document.id_status = $id_status");
 		return $sql->result();
 	}
 
-	public function documentdone($id_session, $id_status)
+	public function documentdone($id_status)
 	{
-		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE tb_document.id_status = $id_status");
 		return $sql->result();
 	}
 
-	public function documentsubmited($id_session, $id_status)
+	public function documentsubmited($id_status)
 	{
-		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE pic_document = $id_session AND tb_document.id_status = $id_status");
+		$sql = $this->db->query("SELECT tb_document.*, user.*, tb_country.*, tb_status.* FROM tb_document JOIN user ON user.id=tb_document.pic_document JOIN tb_country ON tb_document.destination_document=tb_country.id_country JOIN tb_status ON tb_document.id_status=tb_status.id_status WHERE tb_document.id_status = $id_status");
 		return $sql->result();
 	}
 }

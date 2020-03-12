@@ -9,13 +9,8 @@ class Submission extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model("MDocument");
+		$this->load->model("MSubmission");
 		is_logged_in();
-	}
-
-	public function index()
-	{
-		//here
 	}
 
 	public function neworder()
@@ -28,8 +23,8 @@ class Submission extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$data['title'] = 'New Order';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-			$data['destination'] = $this->MDocument->getDestination();
-			$data['getLastId'] = $this->MDocument->getLastId();
+			$data['destination'] = $this->MSubmission->getDestination();
+			$data['getLastId'] = $this->MSubmission->getLastId();
 
 			$this->load->view('templates/header', $data);
 	        $this->load->view('templates/sidebar', $data);
@@ -57,7 +52,7 @@ class Submission extends CI_Controller
 		$id = $this->session->userdata('id');
 		$data['title'] = 'My Documents';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['documents'] = $this->MDocument->myDocuments($id);
+		$data['documents'] = $this->MSubmission->myDocuments($id);
 		$data['id'] = $this->session->userdata('id');
 
 		$this->load->view('templates/header', $data);
@@ -72,9 +67,9 @@ class Submission extends CI_Controller
 		$id_session = $this->session->userdata('id');
 		$data['title'] = 'Tracking Record';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['detailsDocument'] = $this->MDocument->getById($id_document);
-        $data['records'] = $this->MDocument->getAllRecords($id_document);
-        $data['filesByDocument'] = $this->MDocument->getFilesByDocument($id_document, $id_session);
+        $data['detailsDocument'] = $this->MSubmission->getById($id_document);
+        $data['records'] = $this->MSubmission->getAllRecords($id_document);
+        $data['filesByDocument'] = $this->MSubmission->getFilesByDocument($id_document, $id_session);
 
 		$this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -89,7 +84,7 @@ class Submission extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
 
 		$id_session = $this->session->userdata('id');
-		$data['documentsubmited'] = $this->MDocument->documentsubmited($id_session, 1);
+		$data['documentsubmited'] = $this->MSubmission->documentsubmited($id_session, 1);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -104,7 +99,7 @@ class Submission extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
 
 		$id_session = $this->session->userdata('id');
-		$data['documentprocessed'] = $this->MDocument->documentprocessed($id_session, 2);
+		$data['documentprocessed'] = $this->MSubmission->documentprocessed($id_session, 2);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -118,7 +113,7 @@ class Submission extends CI_Controller
 		$data['title'] = 'Document Accepted';
 		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
 		$id_session = $this->session->userdata('id');
-		$data['documentdone'] = $this->MDocument->documentdone($id_session, 3);
+		$data['documentdone'] = $this->MSubmission->documentdone($id_session, 3);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -126,6 +121,26 @@ class Submission extends CI_Controller
 		$this->load->view('document/documentdone', $data);
 		$this->load->view('templates/footer');
 
+	}
+
+	public function addFile($id_document)
+	{
+		$id = $this->session->userdata('id');
+		$data['title'] = 'Add File Attachment';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['detailsDocument'] = $this->MSubmission->getById($id_document);
+		$data['id'] = $this->session->userdata('id');
+
+		$this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('document/v_addFile', $data);
+        $this->load->view('templates/footer');
+
+        if (isset($_POST['submit_file_document'])) {
+        	$this->MSubmission->addFile($_POST, $id_document, $id); 
+        	redirect('documents/details/'.intval($id_document));
+        }
 	}
 
 }

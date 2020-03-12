@@ -65,26 +65,46 @@ class Documents extends CI_Controller
         }
 	}
 
-	public function addFile($id_document)
+	public function documentsubmited()
 	{
-		$id = $this->session->userdata('id');
-		$data['title'] = 'Add File Attachment';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['detailsDocument'] = $this->MDocument->getById($id_document);
-		$data['id'] = $this->session->userdata('id');
+		$data['title'] = 'Documents Submited';
+		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
+
+		$data['documentsubmited'] = $this->MDocument->documentsubmited(1);
 
 		$this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('document/v_addFile', $data);
-        $this->load->view('templates/footer');
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('document/documentsubmited', $data);
+		$this->load->view('templates/footer');
+	}
 
-        if (isset($_POST['submit_file_document'])) {
-        	// $this->MDocument->newRecord($_POST);
-        	// $this->MDocument->updateStatus($_POST, $id);
-        	$this->MDocument->addFile($_POST, $id_document, $id); 
-        	redirect('documents/details/'.intval($id_document));
-        }
+	public function documentprocessed()
+	{
+		$data['title'] = 'Documents Processed';
+		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
+
+		$data['documentprocessed'] = $this->MDocument->documentprocessed(2);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('document/documentprocessed', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function documentdone()
+	{
+		$data['title'] = 'Document Accepted';
+		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
+		$data['documentdone'] = $this->MDocument->documentdone(3);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('document/documentdone', $data);
+		$this->load->view('templates/footer');
+
 	}
 
 }
