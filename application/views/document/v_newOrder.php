@@ -76,6 +76,7 @@
 
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
+                        <button name="submit_draft" type="submit" class="btn btn-primary">Save as Draft</button>
                         <button name="submit_document" type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>

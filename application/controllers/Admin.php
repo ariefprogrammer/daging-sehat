@@ -6,6 +6,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('form_validation');
         is_logged_in();
     }
 
@@ -75,4 +76,38 @@ class Admin extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Access Changed!</div>');
     }
+
+    public function allusers()
+    {
+        $data['title'] = 'All Users';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['allusers'] = $this->db->query("SELECT * FROM user")->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/allusers', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function userManagement($id)
+    {
+        $this->form_validation->set_rules('role_id', 'Role ID', 'required');
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Update User';
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['userbyid'] = $this->db->query("SELECT * FROM user WHERE id=".intval($id))->row_array();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/updateactivation', $data);
+            $this->load->view('templates/footer');
+        }else{
+            $role_id = $this->input->post('role_id');
+            $this->db->query("UPDATE user SET role_id=$role_id WHERE id=".intval($id));
+            redirect('admin/allusers');
+        }
+    }
+
 }
