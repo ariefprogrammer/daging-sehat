@@ -18,7 +18,7 @@
 			<p><?= "Rp. ".$product['harga_barang']?></p>
 			<p><?= $product['bagian_barang']?></p>
 			<p><?= $product['deskripsi_barang']?></p>
-			<p><?= $product['status_barang']?></p>
+			<p><?php if ($product['status_barang'] == 1) { echo "Draft"; }else{ echo "Published";}?></p>
 		</div>
 	</div>
 

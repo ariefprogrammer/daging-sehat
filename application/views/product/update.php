@@ -52,14 +52,10 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Status barang</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="status_barang" name="status_barang">
-                            <?php if($product['status_barang'] == 1){?>
-                                <option value="1" selected>draft</option>
-                                <option value="2">publish</option>
-                            <?php }else{?>
-                                <option value="1">draft</option>
-                                <option value="2" selected>publish</option>
-                            <?php }?>
+                        <select name="status_barang" id="status_barang" class="form-control">
+                            <?php foreach($dd_status as $stat){?>
+                                <option value="<?php echo $stat->id_status?>" <?php if($product['status_barang'] == $stat->id_status){ echo 'selected'; } ?> > <?php echo $stat->name_status?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>

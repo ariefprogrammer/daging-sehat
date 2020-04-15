@@ -127,6 +127,7 @@ class Products extends CI_Controller
 			$data['title'] = 'Update Product';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			$data['product'] = $this->MProduct->getById($id_barang);
+			$data['dd_status'] = $this->db->get('tb_status')->result();
 
 			$this->load->view('templates/header', $data);
 	        $this->load->view('templates/sidebar', $data);
