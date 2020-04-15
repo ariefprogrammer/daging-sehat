@@ -171,6 +171,27 @@ class Products extends CI_Controller
         }
 	}
 
+	public function updateFile($id_slider_image)
+	{
+		//here
+		$data['title'] = 'Update File Attachment';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['imageById'] = $this->MProduct->getImageById($id_slider_image);
+		$id_barang = $this->input->post('id_barang');
+
+		$this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('product/updateFile', $data);
+        $this->load->view('templates/footer');
+
+        if (isset($_POST['update_slider_image'])) {
+        	$this->MProduct->updateFile($_POST, $id_slider_image);
+        	redirect('products/details/'.intval($id_barang));
+        }
+
+	}
+
 	public function published()
 	{
 		//here

@@ -87,4 +87,40 @@ class MProduct extends CI_Model
         $this->db->query("UPDATE products SET nama_barang='$nama_barang', harga_barang='$harga_barang', bagian_barang='$bagian_barang', deskripsi_barang='$deskripsi_barang', thumbnail_barang = '$thumbnail_barang', status_barang = '$status_barang' WHERE id_barang=".intval($id_barang));
         return true;
 	}
+
+	public function getImageById($id_slider_image)
+	{
+		return $this->db->query("SELECT * FROM tb_sliders WHERE id_slider_image =".intval($id_slider_image))->row();
+	}
+
+	public function updateFile($post, $id_slider_image)
+	{
+		//here
+		if(!empty($_FILES['image_slider']['name'])){
+				$image_name =  str_replace(' ','_',date('Ymdhis').$_FILES['image_slider']['name']);
+				$config['upload_path']      = './assets/img/slider/';
+				$config['allowed_types']    = 'gif|jpg|png|webp';
+				$config['max_size']      	= '5048';
+				$config['file_name']        = $image_name;
+				$this->upload->initialize($config);
+				$this->upload->do_upload('image_slider');
+				// echo "<pre>";
+				// print_r($this->upload->data());
+				// print_r($this->upload->display_errors());
+				// echo "</pre>";
+				// exit();
+		}else{
+				$image_name = $this->input->post('old_image_slider');
+		}
+
+		$image_slider = $image_name;
+
+		$sql = $this->db->query("UPDATE tb_sliders SET image_slider = '$image_slider' WHERE id_slider_image=".intval($id_slider_image));
+
+		if ($sql) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
