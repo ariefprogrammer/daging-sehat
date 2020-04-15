@@ -9,6 +9,7 @@ class MSubmission extends CI_Model
 	public function getDestination()
 	{
 		$sql = $this->db->query("SELECT * FROM tb_country");
+		$this->load->model('MProduct');
 		return $sql->result();
 	}
 
