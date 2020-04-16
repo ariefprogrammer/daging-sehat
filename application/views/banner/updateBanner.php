@@ -1,6 +1,5 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <?= var_dump($banners)?>
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800 text-center"><?= $title; ?></h1>

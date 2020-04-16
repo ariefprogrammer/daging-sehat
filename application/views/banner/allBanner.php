@@ -17,11 +17,11 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Title</th>
-                      <th>Subtitle</th>
+                      <th style="width: 25%">Title</th>
+                      <th style="width: 15%">Subtitle</th>
                       <th class="text-center">Image</th>
-                      <th>Status</th>
-                      <th>Action</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -30,8 +30,8 @@
                       <td><?= $data['title_banner']?></td>
                       <td><?= $data['title2_banner']?></td>
                       <td class="text-center"><img style="width: 60%" src="<?php echo base_url('assets/img/banner/') .$data['image_banner']?>"></td>
-                      <td><?php if($data['id_status'] == 1){ echo "draft";}else{echo "published";}?></td>
-                      <td><a href="<?= site_url('banner/update/').$data['id_banner']?>" class="btn btn-small"> <i class="fas fa-edit"></i> </a></td>
+                      <td class="text-center"><?php if($data['id_status'] == 1){ echo "Draft";}else{echo "Published";}?></td>
+                      <td class="text-center"><a href="<?= site_url('banner/update/').$data['id_banner']?>" class="btn btn-small"> <i class="fas fa-edit"></i> </a></td>
                     </tr>
                   <?php endforeach;?>
                   </tbody>

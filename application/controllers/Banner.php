@@ -65,4 +65,14 @@ class Banner extends CI_Controller
 	{
 		//here
 	}
+
+	public function published()
+	{
+		//here
+	}
+
+	public function draft()
+	{
+		//here
+	}
 }

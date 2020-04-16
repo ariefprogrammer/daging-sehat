@@ -16,9 +16,11 @@ class Home extends CI_Controller
 	public function index()
 	{
 		$data['productsHome'] = $this->MProductFE->productsHome();
+		$data['banners'] = $this->db->query("SELECT * FROM tb_banner WHERE id_status=2")->result_array();
 
 		$this->load->view('templatesFE/header');
 		$this->load->view('homeFE/homeFE', $data);
 		$this->load->view('templatesFE/footer');
 	}
+
 }
