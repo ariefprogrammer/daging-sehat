@@ -38,9 +38,10 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="id_status" name="id_status">
-                            <option value="1">draft</option>
-                            <option value="2">publish</option>
+                        <select name="id_status" id="id_status" class="form-control">
+                        <?php foreach($dd_status as $stat){?>
+                        <option value="<?php echo $stat->id_status?>" <?php if($banners['id_status'] == $stat->id_status){ echo 'selected'; } ?> > <?php echo $stat->name_status?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>                          

@@ -47,6 +47,7 @@ class Banner extends CI_Controller
 		$data['title'] = 'Update Banner';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['banners'] = $this->MBanner->getBannerById($id);
+		$data['dd_status'] = $this->db->get('tb_status')->result();
 
 		$this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

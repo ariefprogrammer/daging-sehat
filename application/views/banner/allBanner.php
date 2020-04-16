@@ -19,7 +19,7 @@
                     <tr>
                       <th>Title</th>
                       <th>Subtitle</th>
-                      <th>Image</th>
+                      <th class="text-center">Image</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -29,8 +29,8 @@
                     <tr>
                       <td><?= $data['title_banner']?></td>
                       <td><?= $data['title2_banner']?></td>
-                      <td><?= $data['image_banner']?></td>
-                      <td><?php if($data['image_banner'] == 1){ echo "draft";}else{echo "published";}?></td>
+                      <td class="text-center"><img style="width: 60%" src="<?php echo base_url('assets/img/banner/') .$data['image_banner']?>"></td>
+                      <td><?php if($data['id_status'] == 1){ echo "draft";}else{echo "published";}?></td>
                       <td><a href="<?= site_url('banner/update/').$data['id_banner']?>" class="btn btn-small"> <i class="fas fa-edit"></i> </a></td>
                     </tr>
                   <?php endforeach;?>
