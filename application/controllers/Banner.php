@@ -37,13 +37,27 @@ class Banner extends CI_Controller
 
         if (isset($_POST['submit_banner'])) {
         	$this->MBanner->addBanner($_POST);
-        	//redirect('products/details/'.intval($id_barang));
+        	redirect('banner');
         }
 	}
 
 	public function update($id)
 	{
 		//here
+		$data['title'] = 'Update Banner';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['banners'] = $this->MBanner->getBannerById($id);
+
+		$this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('banner/updateBanner', $data);
+        $this->load->view('templates/footer');
+
+        if (isset($_POST['update_banner'])) {
+        	$this->MBanner->updateBanner($_POST,$id);
+        	redirect('banner');
+        }
 	}
 
 	public function delete($id)
