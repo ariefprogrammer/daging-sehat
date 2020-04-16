@@ -1,0 +1,20 @@
+- delete thumbnail lama waktu update product dan delete product
+- delete image lama waktu update image slider
+- delete image slider saat delete product
++ tambahkan tabel link untuk tokopedia dan instagram.
+- 
+
+====================================================================================================
+								FRONT END															
+====================================================================================================
+
+fitur :
+1. Banner utama
+2. Blog
+3. Get instagram API
+
+
+
+
+-tarik data product
+- tarik data banner

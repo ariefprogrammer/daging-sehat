@@ -68,8 +68,10 @@ class Products extends CI_Controller
 			$thumbnail_barang = $image_name;
             $status_barang = $this->input->post('status_barang');
             $id_baru = $this->input->post('id_baru');
+            $link_tokopedia = $this->input->post('link_tokopedia');
+            $link_instagram = $this->input->post('link_instagram');
 
-            $this->db->query("INSERT INTO products VALUES(NULL, '$nama_barang', '$harga_barang', '$bagian_barang', '$deskripsi_barang', '$thumbnail_barang', '$status_barang')");
+            $this->db->query("INSERT INTO products VALUES(NULL, '$nama_barang', '$harga_barang', '$bagian_barang', '$deskripsi_barang', '$thumbnail_barang', '$status_barang', '$link_tokopedia', '$link_instagram')");
 
             redirect('products/details/'.$id_baru);
         }

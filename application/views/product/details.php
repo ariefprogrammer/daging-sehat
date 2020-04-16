@@ -10,6 +10,8 @@
 			<p>Nama product:</p>
 			<p>Harga product :</p>
 			<p>Bagian :</p>
+			<p>Tokopedia :</p>
+			<p>Instagram :</p>
 			<p>Deskripsi :</p>
 			<p>Status :</p>
 		</div>
@@ -17,6 +19,8 @@
 			<p><?= $product['nama_barang']?></p>
 			<p><?= "Rp. ".$product['harga_barang']?></p>
 			<p><?= $product['bagian_barang']?></p>
+			<p><a href="<?= $product['link_tokopedia']?>">Open Tokopedia</a></p>
+			<p><a href="<?= $product['link_instagram']?>">Open Instagram</a></p> 
 			<p><?= $product['deskripsi_barang']?></p>
 			<p><?php if ($product['status_barang'] == 1) { echo "Draft"; }else{ echo "Published";}?></p>
 		</div>

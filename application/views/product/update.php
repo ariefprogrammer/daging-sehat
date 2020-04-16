@@ -35,6 +35,20 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Tokopedia</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="link_tokopedia" name="link_tokopedia" value="<?= $product['link_tokopedia']?>">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Instagram</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="link_instagram" name="link_instagram" value="<?= $product['link_instagram']?>">
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">Deskripsi</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" id="deskripsi_barang" name="deskripsi_barang"><?= $product['deskripsi_barang']?></textarea>
