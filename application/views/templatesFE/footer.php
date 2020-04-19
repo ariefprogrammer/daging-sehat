@@ -156,7 +156,7 @@
 			</a>
 
 			<div class="t-center s-text8 p-t-20">
-				Copyright © 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+				Copyright © 2020 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://ariefhdt.com" target="_blank">Ariefhdt</a>
 			</div>
 		</div>
 	</footer>
@@ -211,7 +211,7 @@
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?= base_url('FE/')?>vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="<?= base_url('FE/')?>vendor/sweetalert/sweetalert.min.js"></script>
+	<!-- <script type="text/javascript" src="<?= base_url('FE/')?>vendor/sweetalert/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		$('.block2-btn-addcart').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -226,7 +226,7 @@
 				swal(nameProduct, "is added to wishlist !", "success");
 			});
 		});
-	</script>
+	</script> -->
 
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?= base_url('FE/')?>vendor/parallax100/parallax100.js"></script>
